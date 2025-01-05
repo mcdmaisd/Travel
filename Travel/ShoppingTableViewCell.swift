@@ -8,6 +8,7 @@
 import UIKit
 
 class ShoppingTableViewCell: UITableViewCell {
+    
     @IBOutlet var todoLabel: UILabel!
     @IBOutlet var statusChangebuttons: [UIButton]!
     

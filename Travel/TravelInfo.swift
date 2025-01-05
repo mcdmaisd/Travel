@@ -13,7 +13,7 @@ struct Travel {
     let travel_image: String?
     let grade: Double?
     let save: Int?
-    let like: Bool?
+    var like: Bool?
     let ad: Bool
 }
 
@@ -85,7 +85,7 @@ struct TravelInfo {
         Travel(title: "동문 재래 시장",
                description: "먹거리와 생활용품을 판매하는, 제주에서 가장 큰 시장",
                travel_image: "https://images.unsplash.com/photo-1501523460185-2aa5d2a0f981?q=80&w=3331&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-               grade: 4.0,
+               grade: 4.5,
                save: 67696,
                like: true,
                ad: false),
