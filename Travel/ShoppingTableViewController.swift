@@ -80,7 +80,7 @@ class ShoppingTableViewController: UITableViewController {
         config.baseForegroundColor = .black
         config.title = "추가"
         config.cornerStyle = .large
-        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
         addButton.configuration = config
     }
     
