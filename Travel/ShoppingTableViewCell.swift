@@ -24,6 +24,11 @@ class ShoppingTableViewCell: UITableViewCell {
         configureCell()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5.0, left: 0, bottom: 5.0, right: 0))
+    }
+    
     private func configureCell() {
         todoLabel.attributedText = nil
         todoLabel.text = nil
@@ -35,6 +40,9 @@ class ShoppingTableViewCell: UITableViewCell {
     }
         
     private func configureUI() {
+        contentView.layer.cornerRadius = 10
+        contentView.backgroundColor = .lightGray
+        
         todoLabel.font = .systemFont(ofSize: 16)
 
         for (i, button) in statusChangebuttons.enumerated() {

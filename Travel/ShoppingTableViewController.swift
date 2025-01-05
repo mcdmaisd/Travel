@@ -26,8 +26,12 @@ class ShoppingTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.rowHeight = 100
         configureUI()
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -60,16 +64,24 @@ class ShoppingTableViewController: UITableViewController {
     
     private func configureTodoTextField() {
         todoTextField.clearButtonMode = .whileEditing
-        todoTextField.placeholder = "무엇을 구매하실 건가요?(최소 1자 이상 입력)"
-        todoTextField.adjustsFontSizeToFitWidth = true
+        todoTextField.placeholder = "무엇을 구매하실 건가요?"
+        todoTextField.backgroundColor = .clear
+        todoTextField.borderStyle = .none
     }
     
     private func configureUIView() {
-        
+        uiview.layer.cornerRadius = 10
+        uiview.backgroundColor = .lightGray
     }
     
     private func configureAddButton() {
-        
+        var config = UIButton.Configuration.filled()
+        config.baseBackgroundColor = .gray
+        config.baseForegroundColor = .black
+        config.title = "추가"
+        config.cornerStyle = .large
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        addButton.configuration = config
     }
     
     @objc
@@ -193,7 +205,7 @@ extension ShoppingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionNames[section]
+        shoppingList[section].count == 0 ? nil : sectionNames[section]
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -204,6 +216,14 @@ extension ShoppingTableViewController {
             shoppingList[section].remove(at: row)
             tableView.reloadSections(IndexSet(integer: section), with: .automatic)
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        shoppingList[section].count == 0 ? 0 : 30
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        50
     }
 }
 
