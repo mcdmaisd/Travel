@@ -27,6 +27,11 @@ class AdTableViewCell: UITableViewCell {
         configureLabel()
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        setBackgroundColor()
+    }
+    
     private func setBackgroundColor() {
         contentView.backgroundColor = colors.randomElement()
     }

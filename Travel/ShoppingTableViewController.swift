@@ -4,7 +4,7 @@
 //
 //  Created by ilim on 2025-01-03.
 //
-
+// 제가 자주 쓰는 Microsoft To Do: Lists & Tasks 앱과 유사한 기능을 추가해보았습니다.
 import UIKit
 
 class ShoppingItem {
@@ -67,6 +67,7 @@ class ShoppingTableViewController: UITableViewController {
         todoTextField.placeholder = "무엇을 구매하실 건가요?"
         todoTextField.backgroundColor = .clear
         todoTextField.borderStyle = .none
+        todoTextField.font = .systemFont(ofSize: 20)
     }
     
     private func configureUIView() {
@@ -80,7 +81,7 @@ class ShoppingTableViewController: UITableViewController {
         config.baseForegroundColor = .black
         config.title = "추가"
         config.cornerStyle = .large
-        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0)
+        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
         addButton.configuration = config
     }
     
