@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  CityTableViewController.swift
 //  Travel
 //
 //  Created by ilim on 2025-01-03.
@@ -7,13 +7,12 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class CityTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
 
 }
-
