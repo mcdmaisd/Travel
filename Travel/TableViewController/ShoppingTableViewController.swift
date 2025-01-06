@@ -7,31 +7,17 @@
 // 제가 자주 쓰는 Microsoft To Do: Lists & Tasks 앱과 유사한 기능을 추가해보았습니다.
 import UIKit
 
-class ShoppingItem {
-    var isDone = false
-    var isPrimary = false
-    var originalIndex = -1
-    var todo = ""
-}
-
 class ShoppingTableViewController: UITableViewController {
     
     @IBOutlet var todoTextField: UITextField!
     @IBOutlet var uiview: UIView!
     @IBOutlet var addButton: UIButton!
     
-    private var shoppingList: [[ShoppingItem]] = [[], []]
-    
-    private let sectionNames = ["진행중", "완료됨"]
+    private var shoppingList = UserDefaultsManager.shared.read()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        
     }
     
     @IBAction func dismissKeyboard(_ sender: Any) {
@@ -42,7 +28,7 @@ class ShoppingTableViewController: UITableViewController {
         let todo = todoTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
         if todo.count < 1 {
-            presentAlert(message: "최소 1자 이상 입력해 주세요")
+            presentAlert(message: TravelConstants.minimumCharacterMessage)
             todoTextField.text?.removeAll()
             return
         }
@@ -52,7 +38,7 @@ class ShoppingTableViewController: UITableViewController {
         item.todo = todo
         
         shoppingList[sectionIndex].append(item)
-        
+        UserDefaultsManager.shared.save(list: shoppingList)
         tableView.reloadSections(IndexSet(integer: sectionIndex), with: .automatic)
     }
     
@@ -64,14 +50,14 @@ class ShoppingTableViewController: UITableViewController {
     
     private func configureTodoTextField() {
         todoTextField.clearButtonMode = .whileEditing
-        todoTextField.placeholder = "무엇을 구매하실 건가요?"
+        todoTextField.placeholder = TravelConstants.todoPlacdHolder
         todoTextField.backgroundColor = .clear
         todoTextField.borderStyle = .none
         todoTextField.font = .systemFont(ofSize: 20)
     }
     
     private func configureUIView() {
-        uiview.layer.cornerRadius = 10
+        uiview.layer.cornerRadius = TravelConstants.cornerRadius
         uiview.backgroundColor = .lightGray
     }
     
@@ -102,7 +88,7 @@ class ShoppingTableViewController: UITableViewController {
         }
         
         item.isDone.toggle()
-        
+        UserDefaultsManager.shared.save(list: shoppingList)
         tableView.reloadData()
     }
     
@@ -121,7 +107,7 @@ class ShoppingTableViewController: UITableViewController {
         }
         
         item.isPrimary.toggle()
-        
+        UserDefaultsManager.shared.save(list: shoppingList)
         tableView.reloadSections(IndexSet(integer: section), with: .automatic)
     }
     
@@ -153,7 +139,7 @@ extension ShoppingTableViewController {
         let isPrimary = item.isPrimary
         let originalIndex = item.originalIndex
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingTableViewCell", for: indexPath) as! ShoppingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TravelConstants.shoppingCellId, for: indexPath) as! ShoppingTableViewCell
         
         let doneButton = cell.statusChangebuttons[0]
         let bookmarkButton = cell.statusChangebuttons[1]
@@ -166,7 +152,7 @@ extension ShoppingTableViewController {
         cell.todoLabel.tag = row
         
         cell.todoLabel.text = item.todo
-        
+        print(section, row, isDone, isPrimary)
         if originalIndex == -1 {
             shoppingList[section][row].originalIndex = row
         }
@@ -181,7 +167,7 @@ extension ShoppingTableViewController {
         } else if isPrimary {
             bookmarkButton.isSelected = true
             item.originalIndex = row
-            cell.todoLabel.font = .boldSystemFont(ofSize: 20)
+            cell.todoLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
         }
         
         return cell
@@ -202,11 +188,11 @@ extension ShoppingTableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        sectionNames.count
+        TravelConstants.sectionNames.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        shoppingList[section].count == 0 ? nil : sectionNames[section]
+        shoppingList[section].count == 0 ? nil : TravelConstants.sectionNames[section]
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -215,6 +201,7 @@ extension ShoppingTableViewController {
         
         if editingStyle == .delete {
             shoppingList[section].remove(at: row)
+            UserDefaultsManager.shared.save(list: shoppingList)
             tableView.reloadSections(IndexSet(integer: section), with: .automatic)
         }
     }

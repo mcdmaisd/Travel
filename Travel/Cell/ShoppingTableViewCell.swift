@@ -12,9 +12,6 @@ class ShoppingTableViewCell: UITableViewCell {
     @IBOutlet var todoLabel: UILabel!
     @IBOutlet var statusChangebuttons: [UIButton]!
     
-    private let imageNames = ["checkmark.square", "star"]
-    private let selectedSuffix = ".fill"
-    
     override func awakeFromNib() {
         contentView.tintColor = .black
         configureUI()
@@ -27,7 +24,8 @@ class ShoppingTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 5.0, left: 0, bottom: 5.0, right: 0))
+        let inset: CGFloat = 5
+        contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: inset, left: 0, bottom: inset, right: 0))
     }
     
     private func configureCell() {
@@ -41,7 +39,7 @@ class ShoppingTableViewCell: UITableViewCell {
     }
         
     private func configureUI() {
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = TravelConstants.cornerRadius
         contentView.backgroundColor = .lightGray
         
         todoLabel.font = .systemFont(ofSize: 16)
@@ -55,12 +53,12 @@ class ShoppingTableViewCell: UITableViewCell {
         var config = UIButton.Configuration.plain()
         config.baseBackgroundColor = .clear
         button.configuration = config
-        button.configurationUpdateHandler = { [self] btn in
+        button.configurationUpdateHandler = { btn in
             switch btn.state {
             case .selected:
-                btn.configuration?.image = UIImage(systemName: imageNames[i] + selectedSuffix)
+                btn.configuration?.image = UIImage(systemName: TravelConstants.imageNames[i] + TravelConstants.selectedSuffix)
             default :
-                btn.configuration?.image = UIImage(systemName: imageNames[i])
+                btn.configuration?.image = UIImage(systemName: TravelConstants.imageNames[i])
             }
         }
     }

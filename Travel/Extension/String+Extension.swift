@@ -16,12 +16,12 @@ extension String {
     
     func stringToDateFormat() -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyMMdd"
+        formatter.dateFormat = TravelConstants.stringFormat
         guard let date = formatter.date(from: self) else {
             return "변환실패"
         }
         
-        formatter.dateFormat = "yy년 MM월 dd일"
+        formatter.dateFormat = TravelConstants.dateStringFormat
         let dateString = formatter.string(from: date)
         
         return dateString

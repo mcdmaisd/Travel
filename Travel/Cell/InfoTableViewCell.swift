@@ -35,14 +35,14 @@ class InfoTableViewCell: UITableViewCell {
     }
     
     private func configureImageView() {
-        imageview.layer.cornerRadius = 10
+        imageview.layer.cornerRadius = TravelConstants.cornerRadius
         imageview.contentMode = .scaleToFill
     }
     
     private func configureTitleLabel() {
         titleLabel.numberOfLines = 0
         titleLabel.textColor = .black
-        titleLabel.font = .boldSystemFont(ofSize: 20)
+        titleLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
         titleLabel.textAlignment = .left
     }
     

@@ -10,7 +10,7 @@ import Kingfisher
 
 class InfoTableViewController: UITableViewController {
 
-    let list = MagazineInfo().magazine
+    private let list = MagazineInfo().magazine
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class InfoTableViewController: UITableViewController {
 extension InfoTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: "InfoTableViewCell", for: indexPath) as! InfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TravelConstants.InfoCellId, for: indexPath) as! InfoTableViewCell
         
         cell.imageview.kf.setImage(with: URL(string: list[row].photo_image))
         cell.titleLabel.text = list[row].title

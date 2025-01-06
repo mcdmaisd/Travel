@@ -20,7 +20,7 @@ class AdTableViewCell: UITableViewCell {
     }
         
     private func configureUI() {
-        contentView.layer.cornerRadius = 10
+        contentView.layer.cornerRadius = TravelConstants.cornerRadius
         contentView.layer.masksToBounds = true
         setBackgroundColor()
         configureUIView()
@@ -37,12 +37,12 @@ class AdTableViewCell: UITableViewCell {
     }
     
     private func configureUIView() {
-        uiview.layer.cornerRadius = 10
+        uiview.layer.cornerRadius = TravelConstants.cornerRadius
         uiview.backgroundColor = .white
     }
     
     private func configureLabel() {
-        adLabel.font = .boldSystemFont(ofSize: 20)
+        adLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
         adLabel.textAlignment = .center
         adLabel.adjustsFontSizeToFitWidth = true
         adLabel.numberOfLines = 0

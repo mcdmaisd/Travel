@@ -41,7 +41,7 @@ class CityTableViewCell: UITableViewCell {
     }
     
     private func configureImageView() {
-        cityImageView.layer.cornerRadius = 10
+        cityImageView.layer.cornerRadius = TravelConstants.cornerRadius
         cityImageView.contentMode = .scaleToFill
     }
 
@@ -53,15 +53,15 @@ class CityTableViewCell: UITableViewCell {
         button.configurationUpdateHandler = { btn in
             switch btn.state {
             case .selected:
-                btn.configuration?.image = UIImage(systemName: "heart.fill")
+                btn.configuration?.image = UIImage(systemName: TravelConstants.selectedLikeButton)
             default:
-                btn.configuration?.image = UIImage(systemName: "heart")
+                btn.configuration?.image = UIImage(systemName: TravelConstants.normalLikeButton)
             }
         }
     }
 
     private func configureTitleLabel() {
-        titleLabel.font = .boldSystemFont(ofSize: 20)
+        titleLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
         titleLabel.sizeToFit()
     }
 

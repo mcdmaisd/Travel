@@ -10,7 +10,7 @@ import Kingfisher
 
 class CityTableViewController: UITableViewController {
 
-    let list = TravelInfo().travel
+    private let list = TravelInfo().travel
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +36,12 @@ class CityTableViewController: UITableViewController {
         cell.starview.rating = item.grade ?? 0
         cell.saveLabel.text = "· 저장 \(item.save?.formatted() ?? "")"
     }
-
 }
 
 extension CityTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let id = list[row].ad ? "AdTableViewCell" : "CityTableViewCell"
+        let id = list[row].ad ? TravelConstants.adCellId : TravelConstants.cityCellId
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
         
         list[row].ad
