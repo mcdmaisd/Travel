@@ -9,9 +9,11 @@ import UIKit
 
 class ShoppingTableViewCell: UITableViewCell {
     
-    @IBOutlet var todoLabel: UILabel!
-    @IBOutlet var statusChangebuttons: [UIButton]!
+    @IBOutlet private var todoLabel: UILabel!
+    @IBOutlet private(set) var statusChangebuttons: [UIButton]!
     
+    static let id = getId()
+
     override func awakeFromNib() {
         contentView.tintColor = .black
         configureUI()
@@ -32,7 +34,7 @@ class ShoppingTableViewCell: UITableViewCell {
         todoLabel.attributedText = nil
         todoLabel.text = nil
         todoLabel.textColor = .black
-        todoLabel.font = .systemFont(ofSize: 16)
+        todoLabel.font = .systemFont(ofSize: TravelConstants.systemfontSize)
         
         statusChangebuttons.forEach { $0.isSelected = false }
         statusChangebuttons[1].isUserInteractionEnabled = true
@@ -42,7 +44,7 @@ class ShoppingTableViewCell: UITableViewCell {
         contentView.layer.cornerRadius = TravelConstants.cornerRadius
         contentView.backgroundColor = .lightGray
         
-        todoLabel.font = .systemFont(ofSize: 16)
+        todoLabel.font = .systemFont(ofSize: TravelConstants.systemfontSize)
 
         for (i, button) in statusChangebuttons.enumerated() {
             configureButton(i, button)
@@ -61,5 +63,25 @@ class ShoppingTableViewCell: UITableViewCell {
                 btn.configuration?.image = UIImage(systemName: TravelConstants.imageNames[i])
             }
         }
+    }
+    
+    func configureData(_ row: Int, _ todo: String) {
+        statusChangebuttons.forEach { $0.tag = row}
+        todoLabel.tag = row
+        todoLabel.text = todo
+    }
+    
+    func isDone() {
+        todoLabel.attributedText = todoLabel.text?.strikeThrough()
+        todoLabel.textColor = .gray
+        
+        statusChangebuttons[0].isSelected = true
+        statusChangebuttons[1].isSelected = false
+        statusChangebuttons[1].isUserInteractionEnabled = false
+    }
+    
+    func isPrimary() {
+        statusChangebuttons[1].isSelected = true
+        todoLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
     }
 }

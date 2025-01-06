@@ -9,9 +9,9 @@ import UIKit
 
 class ShoppingTableViewController: UITableViewController {
     
-    @IBOutlet var todoTextField: UITextField!
-    @IBOutlet var uiview: UIView!
-    @IBOutlet var addButton: UIButton!
+    @IBOutlet private var todoTextField: UITextField!
+    @IBOutlet private var uiview: UIView!
+    @IBOutlet private var addButton: UIButton!
     
     private var shoppingList = UserDefaultsManager.shared.read()
     
@@ -62,12 +62,14 @@ class ShoppingTableViewController: UITableViewController {
     }
     
     private func configureAddButton() {
+        let inset: CGFloat = 5
+        
         var config = UIButton.Configuration.filled()
         config.baseBackgroundColor = .gray
         config.baseForegroundColor = .black
         config.title = "추가"
         config.cornerStyle = .large
-        config.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5)
+        config.contentInsets = NSDirectionalEdgeInsets(top: inset, leading: inset, bottom: inset, trailing: inset)
         addButton.configuration = config
     }
     
@@ -139,7 +141,7 @@ extension ShoppingTableViewController {
         let isPrimary = item.isPrimary
         let originalIndex = item.originalIndex
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: TravelConstants.shoppingCellId, for: indexPath) as! ShoppingTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ShoppingTableViewCell.id, for: indexPath) as! ShoppingTableViewCell
         
         let doneButton = cell.statusChangebuttons[0]
         let bookmarkButton = cell.statusChangebuttons[1]
@@ -147,27 +149,18 @@ extension ShoppingTableViewController {
         doneButton.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         bookmarkButton.addTarget(self, action: #selector(bookmarkButtonTapped), for: .touchUpInside)
         
-        doneButton.tag = row
-        bookmarkButton.tag = row
-        cell.todoLabel.tag = row
+        cell.configureData(row, item.todo)
         
-        cell.todoLabel.text = item.todo
-        print(section, row, isDone, isPrimary)
         if originalIndex == -1 {
             shoppingList[section][row].originalIndex = row
         }
         
         if isDone {
-            cell.todoLabel.attributedText = cell.todoLabel.text?.strikeThrough()
-            cell.todoLabel.textColor = .gray
-            doneButton.isSelected = true
             item.isPrimary = false
-            bookmarkButton.isSelected = false
-            bookmarkButton.isUserInteractionEnabled = false
+            cell.isDone()
         } else if isPrimary {
-            bookmarkButton.isSelected = true
             item.originalIndex = row
-            cell.todoLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
+            cell.isPrimary()
         }
         
         return cell
@@ -207,11 +200,11 @@ extension ShoppingTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        shoppingList[section].count == 0 ? 0 : 30
+        shoppingList[section].count == 0 ? 0 : TravelConstants.shoppingSectionHeight
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        50
+        TravelConstants.shoppingCellHeight
     }
 }
 

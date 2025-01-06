@@ -9,10 +9,12 @@ import UIKit
 
 class InfoTableViewCell: UITableViewCell {
 
-    @IBOutlet var imageview: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
-    @IBOutlet var dateLabel: UILabel!
+    @IBOutlet private var imageview: UIImageView!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var subtitleLabel: UILabel!
+    @IBOutlet private var dateLabel: UILabel!
+
+    static let id = getId()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +42,7 @@ class InfoTableViewCell: UITableViewCell {
     }
     
     private func configureTitleLabel() {
-        titleLabel.numberOfLines = 0
+        titleLabel.numberOfLines = TravelConstants.numberOfLines
         titleLabel.textColor = .black
         titleLabel.font = .boldSystemFont(ofSize: TravelConstants.boldSize)
         titleLabel.textAlignment = .left
@@ -54,5 +56,12 @@ class InfoTableViewCell: UITableViewCell {
     private func configureDateLabel() {
         dateLabel.textColor = .lightGray
         dateLabel.textAlignment = .right
+    }
+    
+    func configureData(_ item: Magazine) {
+        imageview.kf.setImage(with: URL(string: item.photo_image))
+        titleLabel.text = item.title
+        subtitleLabel.text = item.subtitle
+        dateLabel.text = item.date.stringToDateFormat()
     }
 }

@@ -21,12 +21,9 @@ class InfoTableViewController: UITableViewController {
 extension InfoTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let cell = tableView.dequeueReusableCell(withIdentifier: TravelConstants.InfoCellId, for: indexPath) as! InfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.id, for: indexPath) as! InfoTableViewCell
         
-        cell.imageview.kf.setImage(with: URL(string: list[row].photo_image))
-        cell.titleLabel.text = list[row].title
-        cell.subtitleLabel.text = list[row].subtitle
-        cell.dateLabel.text = list[row].date.stringToDateFormat()
+        cell.configureData(list[row])
         
         return cell
     }
@@ -40,7 +37,7 @@ extension InfoTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        500
+        TravelConstants.InfoCellEstimatedHeight
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

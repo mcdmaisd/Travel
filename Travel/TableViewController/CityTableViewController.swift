@@ -10,7 +10,7 @@ import Kingfisher
 
 class CityTableViewController: UITableViewController {
 
-    private let list = TravelInfo().travel
+    private var list = TravelInfo().travel
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,35 +19,25 @@ class CityTableViewController: UITableViewController {
     @objc
     private func likeButtonTapped(_ sender: UIButton) {
         sender.isSelected.toggle()
-    }
-    
-    private func configureAdCell(_ cell: AdTableViewCell, _ row: Int) {
-        cell.adLabel.text = list[row].title
+        list[sender.tag].like?.toggle()
     }
 
-    private func configureCityCell(_ cell: CityTableViewCell, _ row: Int) {
-        let item = list[row]
-        
-        cell.cityImageView.kf.setImage(with: URL(string: item.travel_image ?? ""))
-        cell.likeButton.isSelected = item.like ?? false
-        cell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        cell.titleLabel.text = item.title
-        cell.subtitleLabel.text = item.description
-        cell.starview.rating = item.grade ?? 0
-        cell.saveLabel.text = "· 저장 \(item.save?.formatted() ?? "")"
-    }
 }
 
 extension CityTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = indexPath.row
-        let id = list[row].ad ? TravelConstants.adCellId : TravelConstants.cityCellId
+        let isAD = list[row].ad
+        let id = isAD ? AdTableViewCell.id : CityTableViewCell.id
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
-        
-        list[row].ad
-            ? configureAdCell(cell as! AdTableViewCell, row)
-            : configureCityCell(cell as! CityTableViewCell, row)
 
+        if isAD {
+            (cell as! AdTableViewCell).configureData(list[row])
+        } else {
+            (cell as! CityTableViewCell).configureData(list[row], row)
+            (cell as! CityTableViewCell).likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+        }
+        
         return cell
     }
     
@@ -56,7 +46,7 @@ extension CityTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        TravelConstants.cityCellEstimatedHeight
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

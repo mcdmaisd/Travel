@@ -287,6 +287,77 @@
             </objects>
             <point key="canvasLocation" x="427" y="1506"/>
         </scene>
+        <!--인기도시-->
+        <scene sceneID="eV3-Fr-UP4">
+            <objects>
+                <tableViewController id="fow-Wp-dKj" customClass="CityInfoTableViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="FWc-DX-W28">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="cph-h7-b1Q">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="97"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Ts5-My-Mo2">
+                                    <rect key="frame" x="20" y="8" width="353" height="81"/>
+                                    <subviews>
+                                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="검색어를 입력해주세요" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="w4V-Kq-BGu">
+                                            <rect key="frame" x="0.0" y="0.0" width="353" height="33"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="searchKeyword:" destination="fow-Wp-dKj" eventType="editingDidEndOnExit" id="28B-KQ-xC9"/>
+                                                <action selector="searchKeyword:" destination="fow-Wp-dKj" eventType="editingChanged" id="IuO-01-MND"/>
+                                            </connections>
+                                        </textField>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="adc-o0-7Cj">
+                                            <rect key="frame" x="0.0" y="48" width="353" height="34"/>
+                                            <segments>
+                                                <segment title="First"/>
+                                                <segment title="Second"/>
+                                                <segment title=""/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="segmentControlTapped:" destination="fow-Wp-dKj" eventType="valueChanged" id="Qjy-9I-eed"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="Ts5-My-Mo2" firstAttribute="leading" secondItem="cph-h7-b1Q" secondAttribute="leading" constant="20" id="2pt-9x-aNs"/>
+                                <constraint firstAttribute="trailing" secondItem="Ts5-My-Mo2" secondAttribute="trailing" constant="20" id="8Nh-uW-pFh"/>
+                                <constraint firstAttribute="bottom" secondItem="Ts5-My-Mo2" secondAttribute="bottom" constant="8" id="I8t-G5-o6S"/>
+                                <constraint firstItem="Ts5-My-Mo2" firstAttribute="top" secondItem="cph-h7-b1Q" secondAttribute="top" constant="8" id="ojE-OZ-Ir8"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="F2y-h5-IhW">
+                                <rect key="frame" x="0.0" y="147" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F2y-h5-IhW" id="txv-Ay-1Xv">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="fow-Wp-dKj" id="9Eh-rM-N8n"/>
+                            <outlet property="delegate" destination="fow-Wp-dKj" id="jVP-7U-ijx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="인기도시" id="1Y2-Le-vX4"/>
+                    <connections>
+                        <outlet property="segmentControl" destination="adc-o0-7Cj" id="rIU-TM-sZf"/>
+                        <outlet property="textField" destination="w4V-Kq-BGu" id="w0i-Uw-tdC"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="974-xJ-xYn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1165.6488549618321" y="1505.6338028169014"/>
+        </scene>
         <!--SeSAC TRAVEL-->
         <scene sceneID="zdf-Hk-Qjb">
             <objects>
@@ -388,6 +459,7 @@
                         <segue destination="kkP-e8-5bD" kind="relationship" relationship="viewControllers" id="7Fn-k7-88y"/>
                         <segue destination="Stw-yn-1gU" kind="relationship" relationship="viewControllers" id="JAq-TR-Ru3"/>
                         <segue destination="HZw-gz-1oF" kind="relationship" relationship="viewControllers" id="knK-K6-lyj"/>
+                        <segue destination="dqp-iv-UGC" kind="relationship" relationship="viewControllers" id="bbg-Nk-pOv"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="b1Z-hV-exG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -451,10 +523,30 @@
             </objects>
             <point key="canvasLocation" x="427" y="806"/>
         </scene>
+        <!--인기 도시-->
+        <scene sceneID="n6W-y2-wsK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dqp-iv-UGC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="인기 도시" image="flame.fill" catalog="system" id="sK6-JJ-x9y"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="S8t-VX-RAH">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="fow-Wp-dKj" kind="relationship" relationship="rootViewController" id="RGc-yn-kQZ"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZhQ-f3-Rwh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1166" y="806"/>
+        </scene>
     </scenes>
     <resources>
         <image name="airplane" catalog="system" width="128" height="115"/>
         <image name="bag" catalog="system" width="128" height="128"/>
+        <image name="flame.fill" catalog="system" width="106" height="128"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

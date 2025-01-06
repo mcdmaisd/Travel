@@ -26,4 +26,8 @@ extension String {
         
         return dateString
     }
+    
+    func hasMatchedToPropertyValue(_ unicodePropertyValue: String) -> Bool {
+        return self.range(of: "\\p{\(unicodePropertyValue)}", options: .regularExpression) != nil
+    }
 }

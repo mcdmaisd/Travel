@@ -10,12 +10,14 @@ import Cosmos
 
 class CityTableViewCell: UITableViewCell {
 
-    @IBOutlet var cityImageView: UIImageView!
-    @IBOutlet var likeButton: UIButton!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var subtitleLabel: UILabel!
-    @IBOutlet var starview: CosmosView!
-    @IBOutlet var saveLabel: UILabel!
+    @IBOutlet private var cityImageView: UIImageView!
+    @IBOutlet private(set) var likeButton: UIButton!
+    @IBOutlet private var titleLabel: UILabel!
+    @IBOutlet private var subtitleLabel: UILabel!
+    @IBOutlet private var starview: CosmosView!
+    @IBOutlet private var saveLabel: UILabel!
+
+    static let id = getId()
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,7 +68,7 @@ class CityTableViewCell: UITableViewCell {
     }
 
     private func configureSubtitleLabel() {
-        subtitleLabel.font = .systemFont(ofSize: 16)
+        subtitleLabel.font = .systemFont(ofSize: TravelConstants.systemfontSize)
         subtitleLabel.textColor = .gray
         subtitleLabel.numberOfLines = 0
     }
@@ -81,4 +83,14 @@ class CityTableViewCell: UITableViewCell {
         saveLabel.textColor = .lightGray
         saveLabel.sizeToFit()
     }
+    
+    func configureData(_ item: Travel, _ row: Int) {
+        cityImageView.kf.setImage(with: URL(string: item.travel_image ?? ""))
+        likeButton.tag = row
+        likeButton.isSelected = item.like ?? false
+        titleLabel.text = item.title
+        subtitleLabel.text = item.description
+        starview.rating = item.grade ?? 0
+        saveLabel.text = "· 저장 \(item.save?.formatted() ?? "")"
+    }    
 }
