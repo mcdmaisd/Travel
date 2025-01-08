@@ -74,7 +74,7 @@ class CityInfoCollectionViewController: UIViewController, UICollectionViewDelega
         layout.itemSize = CGSize(width: itemWidth, height: itemWidth * 1.5)
         layout.minimumLineSpacing = inset
         layout.minimumInteritemSpacing = inset
-        layout.sectionInset = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: inset, right: inset)
         
         cityCollectionView.collectionViewLayout = layout
     }

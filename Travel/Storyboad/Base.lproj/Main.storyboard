@@ -473,7 +473,7 @@
                                 </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="3fc-cQ-mBy">
-                                <rect key="frame" x="0.0" y="144" width="393" height="625"/>
+                                <rect key="frame" x="0.0" y="154" width="393" height="615"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="eP2-4B-kAq">
                                     <size key="itemSize" width="128" height="128"/>
@@ -501,7 +501,7 @@
                             <constraint firstItem="niL-yR-wP0" firstAttribute="leading" secondItem="ZrW-lS-802" secondAttribute="leading" constant="10" id="cgg-Bd-fwr"/>
                             <constraint firstItem="niL-yR-wP0" firstAttribute="top" secondItem="ZrW-lS-802" secondAttribute="top" constant="10" id="hzK-Rl-olK"/>
                             <constraint firstItem="ZrW-lS-802" firstAttribute="trailing" secondItem="3fc-cQ-mBy" secondAttribute="trailing" id="lqg-De-GCR"/>
-                            <constraint firstItem="3fc-cQ-mBy" firstAttribute="top" secondItem="niL-yR-wP0" secondAttribute="bottom" id="pce-VO-zzN"/>
+                            <constraint firstItem="3fc-cQ-mBy" firstAttribute="top" secondItem="niL-yR-wP0" secondAttribute="bottom" constant="10" id="pce-VO-zzN"/>
                             <constraint firstItem="ZrW-lS-802" firstAttribute="trailing" secondItem="niL-yR-wP0" secondAttribute="trailing" constant="10" id="sGE-vZ-cDF"/>
                         </constraints>
                     </view>
