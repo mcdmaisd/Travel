@@ -29,4 +29,6 @@ struct TravelConstants {
     static let segmentTitles = ["모두", "국내", "해외"]
     static let categoryName = "Hangul"
     static let separator = " | "
+    static let cancelImage = "xmark"
+    static let backImage = "chevron.backward"
 }

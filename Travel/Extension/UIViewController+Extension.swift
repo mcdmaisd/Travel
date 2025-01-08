@@ -13,4 +13,8 @@ extension UIViewController {
         alert.addAction(UIAlertAction(title: "확인", style: .default))
         present(alert, animated: true)
     }
+    
+    static func getId() -> String {
+        return String(describing: self)
+    }
 }

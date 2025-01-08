@@ -21,7 +21,19 @@ class CityTableViewController: UITableViewController {
         sender.isSelected.toggle()
         list[sender.tag].like?.toggle()
     }
-
+    
+    @objc
+    private func back() {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    private func configureNavigationBar(_ ad: Bool, _ vc: UIViewController) {
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(back))
+        let image = ad ? UIImage(systemName: TravelConstants.cancelImage) : UIImage(systemName: TravelConstants.backImage)
+        backBarButtonItem.tintColor = .black
+        backBarButtonItem.image = image
+        vc.navigationItem.leftBarButtonItem = backBarButtonItem
+    }
 }
 
 extension CityTableViewController {
@@ -30,7 +42,7 @@ extension CityTableViewController {
         let isAD = list[row].ad
         let id = isAD ? AdTableViewCell.id : CityTableViewCell.id
         let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath)
-
+                
         if isAD {
             (cell as! AdTableViewCell).configureData(list[row])
         } else {
@@ -55,5 +67,20 @@ extension CityTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let row = indexPath.row
+        let isAD = list[row].ad
+        let id = isAD ? AdDetailViewController.id : CityDetailViewController.id
+        let vc = isAD
+            ? storyboard?.instantiateViewController(withIdentifier: id) as! AdDetailViewController
+            : storyboard?.instantiateViewController(withIdentifier: id) as! CityDetailViewController
+        
+        if isAD {
+            (vc as! AdDetailViewController).adMessage = list[row].title
+        } else {
+            (vc as! CityDetailViewController).info = list[row]
+        }
+        
+        configureNavigationBar(isAD, vc)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
