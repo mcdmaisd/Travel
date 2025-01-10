@@ -29,7 +29,10 @@ class CityTableViewController: UITableViewController {
     
     private func configureNavigationBar(_ ad: Bool, _ vc: UIViewController) {
         let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(back))
-        let image = ad ? UIImage(systemName: TravelConstants.cancelImage) : UIImage(systemName: TravelConstants.backImage)
+        let image = ad
+            ? UIImage(systemName: TravelConstants.cancelImage)
+            : UIImage(systemName: TravelConstants.backImage)
+
         backBarButtonItem.tintColor = .black
         backBarButtonItem.image = image
         vc.navigationItem.leftBarButtonItem = backBarButtonItem

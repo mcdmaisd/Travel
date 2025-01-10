@@ -17,14 +17,10 @@ extension String {
     func stringToDateFormat() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = TravelConstants.stringFormat
-        guard let date = formatter.date(from: self) else {
-            return "변환실패"
-        }
+        guard let date = formatter.date(from: self) else { return "변환실패" }
         
         formatter.dateFormat = TravelConstants.dateStringFormat
-        let dateString = formatter.string(from: date)
-        
-        return dateString
+        return formatter.string(from: date)
     }
     
     func hasMatchedToPropertyValue(_ unicodePropertyValue: String) -> Bool {
