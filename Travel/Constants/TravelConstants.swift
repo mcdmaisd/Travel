@@ -22,6 +22,8 @@ struct TravelConstants {
     static let selectedSuffix = ".fill"
     static let stringFormat = "yyMMdd"
     static let dateStringFormat = "yy년 MM월 dd일"
+    static let chatDateInputForamt = "yyyy.MM.dd HH:mm"
+    static let chatDateOutputForamt = "yy.MM.dd"
     static let arrayUserDefaultsKey = "shoppingList"
     static let todoPlacdHolder = "무엇을 구매하실 건가요?"
     static let minimumCharacterMessage = "최소 1자 이상 입력해 주세요"

@@ -11,7 +11,7 @@ enum User: String {
     case jack = "Jack"
     case bran = "Bran"
     case den = "Den"
-    case user //본인
+    case user
     case other_friend = "내옆자리의앞자리에개발잘하는친구"
     case simsim = "심심이"
     
@@ -56,7 +56,7 @@ let mockChatList: [ChatRoom] = [
              ]
             ),
     ChatRoom(chatroomId: 2,
-             chatroomImage: [User.hue.profileImage],
+             chatroomImage: [User.hue.profileImage, User.hue.profileImage, User.hue.profileImage],
              chatroomName: User.hue.rawValue,
              chatList: [
                 Chat(user: .hue,
@@ -76,7 +76,7 @@ let mockChatList: [ChatRoom] = [
                      message: "화이팅 ^^"),
              ]),
     ChatRoom(chatroomId: 3,
-             chatroomImage: [User.jack.profileImage],
+             chatroomImage: [User.jack.profileImage, User.jack.profileImage],
              chatroomName: User.jack.rawValue,
              chatList: [
                 Chat(user: .jack,

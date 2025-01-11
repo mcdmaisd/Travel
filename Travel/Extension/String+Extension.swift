@@ -14,13 +14,19 @@ extension String {
         return attributeString
     }
     
-    func stringToDateFormat() -> String {
+    func stringToDateFormat(_ inputFormat: String, _ outputFormat: String) -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = TravelConstants.stringFormat
-        guard let date = formatter.date(from: self) else { return "변환실패" }
-        
-        formatter.dateFormat = TravelConstants.dateStringFormat
+        let date = stringToDate(inputFormat)
+        formatter.dateFormat = outputFormat
+        formatter.locale = Locale(identifier: "ko_KR")
         return formatter.string(from: date)
+    }
+    
+    func stringToDate(_ format: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        let date = formatter.date(from: self)
+        return date ?? Date()
     }
     
     func hasMatchedToPropertyValue(_ unicodePropertyValue: String) -> Bool {

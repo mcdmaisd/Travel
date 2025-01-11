@@ -62,6 +62,6 @@ class InfoTableViewCell: UITableViewCell {
         imageview.kf.setImage(with: URL(string: item.photo_image))
         titleLabel.text = item.title
         subtitleLabel.text = item.subtitle
-        dateLabel.text = item.date.stringToDateFormat()
+        dateLabel.text = item.date.stringToDateFormat(TravelConstants.stringFormat, TravelConstants.dateStringFormat)
     }
 }
