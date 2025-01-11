@@ -28,12 +28,12 @@ extension ChatListViewController {
     private func initNavigationBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.automaticallyShowsCancelButton = true
-        searchController.searchBar.placeholder = "친구 이름을 검색해보세요"
+        searchController.searchBar.placeholder = TravelConstants.searchbarPlaceholder
         searchController.searchBar.delegate = self
         
         self.navigationItem.searchController = searchController
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.navigationItem.title = "TRAVEL TALK"
+        self.navigationItem.title = TravelConstants.chatListTitle
     }
     
     private func initTableView() {
@@ -56,6 +56,20 @@ extension ChatListViewController {
         
         filteredList = result
     }
+    
+    private func configureNavigationBar(_ vc: UIViewController) {
+        let backBarButtonItem = UIBarButtonItem(title: nil, style: .plain, target: self, action: #selector(back))
+        let image = UIImage(systemName: TravelConstants.backImage)
+
+        backBarButtonItem.tintColor = .black
+        backBarButtonItem.image = image
+        vc.navigationItem.leftBarButtonItem = backBarButtonItem
+    }
+
+    @objc
+    private func back() {
+        navigationController?.popViewController(animated: true)
+    }
 }
 
 extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -74,6 +88,15 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = indexPath.row
+        let id = ChattingViewController.id
+        let vc = storyboard?.instantiateViewController(withIdentifier: id) as! ChattingViewController
+        
+        vc.list = filteredList[row].chatList
+        vc.roomName = filteredList[row].chatroomName
+        configureNavigationBar(vc)
+        navigationController?.pushViewController(vc, animated: true)
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -734,13 +734,28 @@
         <!--Chatting View Controller-->
         <scene sceneID="BeO-Ys-3ad">
             <objects>
-                <viewController id="GZm-dc-pUc" customClass="ChattingViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChattingViewController" id="GZm-dc-pUc" customClass="ChattingViewController" customModule="Travel" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="J9U-KR-k6Y">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NLs-Vj-HOE">
+                                <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6eB-zg-OPq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6eB-zg-OPq" firstAttribute="trailing" secondItem="NLs-Vj-HOE" secondAttribute="trailing" id="hzF-9D-eND"/>
+                            <constraint firstItem="NLs-Vj-HOE" firstAttribute="leading" secondItem="6eB-zg-OPq" secondAttribute="leading" id="sg2-de-OA4"/>
+                            <constraint firstItem="6eB-zg-OPq" firstAttribute="bottom" secondItem="NLs-Vj-HOE" secondAttribute="bottom" id="yTh-NG-YqS"/>
+                            <constraint firstItem="NLs-Vj-HOE" firstAttribute="top" secondItem="6eB-zg-OPq" secondAttribute="top" id="ykq-Cl-I9c"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="NLs-Vj-HOE" id="WDc-gu-ucj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WWd-EV-Rrf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

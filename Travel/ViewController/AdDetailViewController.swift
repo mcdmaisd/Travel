@@ -22,7 +22,7 @@ class AdDetailViewController: UIViewController {
     }
     
     private func configureNavigationBar() {
-        title = "광고 화면"
+        title = TravelConstants.adTitle
     }
     
     private func configureAdLabel() {
