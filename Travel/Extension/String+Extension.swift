@@ -18,13 +18,14 @@ extension String {
         let formatter = DateFormatter()
         let date = stringToDate(inputFormat)
         formatter.dateFormat = outputFormat
-        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         return formatter.string(from: date)
     }
     
     func stringToDate(_ format: String) -> Date {
         let formatter = DateFormatter()
         formatter.dateFormat = format
+        formatter.timeZone = TimeZone(identifier: "Asia/Seoul")
         let date = formatter.date(from: self)
         return date ?? Date()
     }

@@ -23,10 +23,11 @@ struct TravelConstants {
     static let selectedSuffix = ".fill"
     static let stringFormat = "yyMMdd"
     static let dateStringFormat = "yy년 MM월 dd일"
-    static let chatDateInputForamt = "yyyy.MM.dd HH:mm"
+    static let chatDateInputForamt = "yyyy-MM-dd HH:mm"
     static let chatDateOutputForamt = "yy.MM.dd"
     static let chatBubbleDateFormat = "hh:mm a"
     static let arrayUserDefaultsKey = "shoppingList"
+    static let dateSeparatorFormat = "yyyy년 MM월 dd일"
     static let todoPlacdHolder = "무엇을 구매하실 건가요?"
     static let minimumCharacterMessage = "최소 1자 이상 입력해 주세요"
     static let sectionNames = ["진행중", "완료됨"]
@@ -39,4 +40,5 @@ struct TravelConstants {
     static let adTitle = "광고 화면"
     static let searchbarPlaceholder = "친구 이름을 검색해보세요"
     static let chatListTitle = "TRAVEL TALK"
+    static let textviewPlaceholder = "메시지를 입력하세요"
 }

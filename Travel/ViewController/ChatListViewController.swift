@@ -9,18 +9,18 @@ import UIKit
 
 class ChatListViewController: UIViewController {
 
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var collectionView: UICollectionView!
     
     private var filteredList = mockChatList {
         didSet {
-            tableView.reloadData()
+            collectionView.reloadData()
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initNavigationBar()
-        initTableView()
+        initCollectionView()
     }
 }
 
@@ -36,13 +36,14 @@ extension ChatListViewController {
         self.navigationItem.title = TravelConstants.chatListTitle
     }
     
-    private func initTableView() {
-        let id = ChatListTableViewCell.id
-        let xib = UINib(nibName: ChatListTableViewCell.id, bundle: nil)
+    private func initCollectionView() {
+        let id = ChatListCollectionViewCell.id
+        let xib = UINib(nibName: id, bundle: nil)
         
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(xib, forCellReuseIdentifier: id)
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(xib, forCellWithReuseIdentifier: id)
+        collectionView.configureFlowLayout(numberOfItemsInRow: 1, numberofItemsInColumn: 5)
     }
     
     private func searchRoomName(_ text: String) {
@@ -72,22 +73,22 @@ extension ChatListViewController {
     }
 }
 
-extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+extension ChatListViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         filteredList.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let row = indexPath.row
-        let id = ChatListTableViewCell.id
-        let cell = tableView.dequeueReusableCell(withIdentifier: id) as! ChatListTableViewCell
+        let id = ChatListCollectionViewCell.id
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath) as! ChatListCollectionViewCell
         
         cell.configureData(filteredList[row])
 
         return cell
     }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row
         let id = ChattingViewController.id
         let vc = storyboard?.instantiateViewController(withIdentifier: id) as! ChattingViewController
@@ -97,7 +98,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         configureNavigationBar(vc)
         navigationController?.pushViewController(vc, animated: true)
         
-        tableView.deselectRow(at: indexPath, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 

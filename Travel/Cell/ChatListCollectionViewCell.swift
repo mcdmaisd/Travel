@@ -1,20 +1,20 @@
 //
-//  ChatListTableViewCell.swift
+//  ChatListCollectionViewCell.swift
 //  Travel
 //
-//  Created by ilim on 2025-01-11.
+//  Created by ilim on 2025-01-12.
 //
 
 import UIKit
 
-class ChatListTableViewCell: UITableViewCell {
+class ChatListCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet private var lastChatDateLabel: UILabel!
-    @IBOutlet private var lastChatLabel: UILabel!
-    @IBOutlet private var userNameLabel: UILabel!
     @IBOutlet private var profileStackView: UIStackView!
-    @IBOutlet private var profileImages: [UIImageView]!
     @IBOutlet private var lastStackView: UIStackView!
+    @IBOutlet private var userNameLabel: UILabel!
+    @IBOutlet private var lastChatLabel: UILabel!
+    @IBOutlet private var lastChatDateLabel: UILabel!
+    @IBOutlet private var profileImages: [UIImageView]!
     
     static let id = getId()
     
@@ -25,7 +25,10 @@ class ChatListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        profileImages.forEach { $0.image = nil }
+        profileImages.forEach {
+            $0.image = nil
+            $0.isHidden = true
+        }
         userNameLabel.text = nil
         lastChatLabel.text = nil
         lastChatDateLabel.text = nil
@@ -61,7 +64,7 @@ class ChatListTableViewCell: UITableViewCell {
     private func configureProfileImageView() {
         profileImages.forEach {
             $0.contentMode = .scaleAspectFit
-            $0.backgroundColor = .clear
+            $0.isHidden = true
         }
     }
     
@@ -87,6 +90,7 @@ class ChatListTableViewCell: UITableViewCell {
     func configureData(_ data: ChatRoom) {
         for (i, imageName) in data.chatroomImage.enumerated() {
             profileImages[i].image = UIImage(named: imageName)
+            profileImages[i].isHidden = false
         }
         
         hideStackView()
