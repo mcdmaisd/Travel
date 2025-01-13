@@ -13,10 +13,10 @@ class ChattingViewController: UIViewController {
     @IBOutlet private var outlineView: UIView!
     @IBOutlet private var textView: UITextView!
     @IBOutlet private var sendButton: UIButton!
-    @IBOutlet private var tableViewTopConstraint: NSLayoutConstraint!
     
     private lazy var convertedList: [Chat] = list ?? []
     private var originY: CGFloat?
+    private var originHeight: CGFloat?
     
     var list: [Chat]?
     var roomName: String?
@@ -34,13 +34,21 @@ class ChattingViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         let outlineViewOriginY = outlineView.frame.origin.y
+        let tableViewOriginHeight = tableView.frame.size.height
+        
         originY = originY ?? outlineViewOriginY
+        originHeight = originHeight ?? tableViewOriginHeight
+        
         let yOffset = abs((originY ?? 0) - outlineViewOriginY)
-        if yOffset != tableViewTopConstraint.constant {
-            tableViewTopConstraint.constant = (-yOffset)
-            tableView.layoutIfNeeded()
+       
+        if yOffset != 0 {
+            tableView.frame.size.height = (originHeight ?? 0) - yOffset
             scrollToBottom()
+        } else {
+            tableView.frame.size.height = originHeight ?? 0
         }
+        
+        tableView.layoutIfNeeded()
     }
     
     private func configureUI() {

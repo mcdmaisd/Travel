@@ -801,7 +801,7 @@
                         <keyboardLayoutGuide key="keyboard" id="yQv-IE-iCr"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qBs-Eg-uPA" firstAttribute="top" secondItem="NLs-Vj-HOE" secondAttribute="bottom" constant="10" id="GAe-Pt-LVU"/>
+                            <constraint firstItem="qBs-Eg-uPA" firstAttribute="top" secondItem="NLs-Vj-HOE" secondAttribute="bottom" constant="10" id="B43-pG-Uzc"/>
                             <constraint firstItem="yQv-IE-iCr" firstAttribute="top" secondItem="qBs-Eg-uPA" secondAttribute="bottom" constant="10" id="VjD-lc-YJB"/>
                             <constraint firstItem="qBs-Eg-uPA" firstAttribute="leading" secondItem="6eB-zg-OPq" secondAttribute="leading" constant="20" id="d6M-cb-pgI"/>
                             <constraint firstItem="6eB-zg-OPq" firstAttribute="trailing" secondItem="qBs-Eg-uPA" secondAttribute="trailing" constant="20" id="hff-fN-q7Q"/>
@@ -814,7 +814,6 @@
                         <outlet property="outlineView" destination="qBs-Eg-uPA" id="dRq-Xw-l6K"/>
                         <outlet property="sendButton" destination="yJd-pG-6ov" id="aT1-Hp-aqr"/>
                         <outlet property="tableView" destination="NLs-Vj-HOE" id="WDc-gu-ucj"/>
-                        <outlet property="tableViewTopConstraint" destination="ykq-Cl-I9c" id="MpA-Ye-ZIa"/>
                         <outlet property="textView" destination="TYS-4t-JXo" id="J0Z-Ec-Asm"/>
                     </connections>
                 </viewController>
